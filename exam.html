@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاختبار</title>
+</head>
+<body>
+    <h1>الاختبار</h1>
+    <form method="POST">
+        {% for question in questions %}
+            <fieldset>
+                <legend>{{ question['question'] }}</legend>
+                {% for choice in question['choices'] %}
+                    <label>
+                        <input type="radio" name="q{{ loop.index }}" value="{{ choice }}"
+                            {% if user_answers and user_answers.get('q' + loop.index|string) == choice %} checked {% endif %}>
+                        {{ choice }}
+                    </label><br>
+                {% endfor %}
+            </fieldset>
+        {% endfor %}
+        <button type="submit">تقديم</button>
+    </form>
+
+    {% if score is not none %}
+        <h2>نتيجتك: {{ score }}/{{ questions|length }}</h2>
+        {% if passed %}
+            <p>لقد نجحت!</p>
+        {% else %}
+            <p>لم تنجح، حاول مرة أخرى!</p>
+        {% endif %}
+    {% endif %}
+
+    <h3>لتحميل امتحان جهوي في التكنولوجيا، يمكنك تحميله من الرابط التالي:</h3>
+    <a href="https://moutamadris.ma/wp-content/uploads/2022/03/%D8%A7%D9%84%D8%A5%D9%85%D8%AA%D8%AD%D8%A7%D9%86-%D8%A7%D9%84%D8%AC%D9%87%D9%88%D9%8A-%D9%81%D9%8A-%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7-%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%D8%A9-%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A-2014-%D8%A7%D9%84%D8%B1%D8%B4%D9%8A%D8%AF%D9%8A%D8%A9.pdf" target="_blank">
+        اضغط هنا لتحميل الامتحان الجهوي
+    </a>
+</body>
+</html>
+

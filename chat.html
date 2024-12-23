@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محادثة تشبه إنستغرام</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- تضمين مكتبة jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="chat-app">
+        <header class="chat-header">
+            <div class="chat-title">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+                <span>محادثات</span>
+            </div>
+        </header>
+
+        <section class="chat-container">
+            <!-- جزء لإدخال الاسم -->
+            <div class="user-info">
+                <label for="username">أدخل اسمك:</label>
+                <input type="text" id="username" placeholder="اسم المستخدم">
+            </div>
+
+            <!-- نافذة المحادثة -->
+            <section class="chat-window" id="chat-window">
+                {% for comment in comments %}
+                    <div class="chat-message {% if loop.index % 2 == 0 %}me{% else %}other{% endif %}">
+                        <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="Avatar" class="avatar">
+                        <div class="bubble">
+                            <p>{{ comment.content }}</p>
+                            <span class="timestamp">{{ comment.timestamp }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+
+            <!-- الحقل لإرسال الرسالة -->
+            <footer class="chat-footer">
+                <form id="chat-form">
+                    <input type="text" name="content" id="message-input" placeholder="اكتب رسالة..." required>
+                    <button type="submit" id="send-button">إرسال</button>
+                </form>
+            </footer>
+        </section>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // إرسال رسالة جديدة عبر AJAX
+            $('#chat-form').submit(function (e) {
+                e.preventDefault();
+
+                var messageContent = $('#message-input').val();
+                var user = $('#username').val();  // جلب اسم المستخدم
+
+                if (messageContent.trim() === '' || user.trim() === '') {
+                    alert('من فضلك، أدخل اسمك ورسالتك');
+                    return;
+                }
+
+                // إرسال البيانات عبر AJAX
+                $.ajax({
+                    url: '/add_comment',
+                    type: 'POST',
+                    data: { content: messageContent, user: user },
+                    success: function (response) {
+                        // عند إرسال الرسالة بنجاح، قم بتحديث نافذة المحادثة
+                        $('#chat-window').append(`
+                            <div class="chat-message me">
+                                <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="Avatar" class="avatar">
+                                <div class="bubble">
+                                    <p>${messageContent}</p>
+                                    <span class="timestamp">${new Date().toLocaleTimeString()}</span>
+                                </div>
+                            </div>
+                        `);
+                        
+                        // مسح حقل الإدخال
+                        $('#message-input').val('');
+
+                        // التمرير لأسفل لعرض آخر الرسائل
+                        $('#chat-window').scrollTop($('#chat-window')[0].scrollHeight);
+                    },
+                    error: function () {
+                        alert('حدث خطأ أثناء إرسال الرسالة.');
+                    }
+                });
+            });
+
+            // تأثير ظهور الرسائل
+            $('.chat-message').hide().fadeIn(800);
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            margin: 20px;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .links a {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        .links a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>مرحبًا بك في الموقع!</h1>
+</header>
+
+<div class="container">
+    <p>هذه هي الصفحة الرئيسية لتطبيق Flask الخاص بك.</p>
+    <div class="links">
+        <a href="/lessons">الدروس</a>
+        <a href="/exam">الامتحان</a>
+        <a href="/chat">الدردشة</a>
+    </div>
+</div>
+
+</body>
+</html>
+

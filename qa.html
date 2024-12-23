@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسئلة والإجابات</title>
+</head>
+<body>
+    <h1>الأسئلة والإجابات</h1>
+    <form method="POST">
+        <label for="question">أدخل سؤالك:</label>
+        <input type="text" name="question" id="question" required>
+        <button type="submit">ابحث عن إجابة</button>
+    </form>
+
+    {% if question %}
+        <h3>سؤال المستخدم:</h3>
+        <p>{{ question }}</p>
+        <h3>الإجابة:</h3>
+        <p>{{ answer }}</p>
+    {% endif %}
+</body>
+</html>
+

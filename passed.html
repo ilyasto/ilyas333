@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إجتياز الامتحان</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            margin: 20px;
+        }
+        .score {
+            font-size: 1.5em;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>إجتياز الامتحان</h1>
+</header>
+
+<div class="container">
+    <p>ألف مبروك! لقد اجتزت الامتحان بنجاح.</p>
+    <p class="score">نقاطك: {{ score }} من 20</p>
+    <p>مبروك مرة أخرى! يمكنك العودة إلى الصفحة الرئيسية أو بدء امتحان آخر.</p>
+    <a href="{{ url_for('home') }}">العودة إلى الصفحة الرئيسية</a>
+</div>
+
+</body>
+</html>
+

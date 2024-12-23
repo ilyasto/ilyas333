@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النتيجة</title>
+</head>
+<body>
+    <h1>نتيجتك</h1>
+    <p>حصلت على {{ score }} من أصل {{ total }}.</p>
+    {% if passed %}
+        <p>مبروك! لقد اجتزت الاختبار.</p>
+    {% else %}
+        <p>للأسف، لم تجتز الاختبار. حاول مرة أخرى!</p>
+    {% endif %}
+    <a href="{{ url_for('exam') }}">إعادة المحاولة</a>
+</body>
+</html>
+
